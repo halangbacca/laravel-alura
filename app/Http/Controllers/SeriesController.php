@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\SeriesRepositoryInterface;
+use App\Events\SeriesCreated;
 use App\Http\Middleware\Authenticator;
 use App\Http\Requests\SeriesFormRequest;
 use App\Models\Series;
@@ -31,7 +32,18 @@ class SeriesController extends Controller
 
     public function store(SeriesFormRequest $request)
     {
+        $cover = $request->file('cover');
+        if ($cover) {
+            $coverPath = $cover->store('series_cover', 'public');
+            $request->coverPath = $coverPath;
+        }
+
         $series = $this->repository->add($request);
+        $seriesCreatedEvent = new SeriesCreated(
+            $series->name, $request->seasonsQty, $request->episodesQty, $series->id);
+
+        event($seriesCreatedEvent);
+
         $request->session()->flash('mensagem.sucesso', "Série {$series->name} criada com sucesso");
         return to_route('series.index');
     }

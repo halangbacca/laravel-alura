@@ -6,6 +6,7 @@ use App\Http\Controllers\SeasonsController;
 use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Middleware\Authenticator;
+use App\Mail\SeriesCreated;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(SeriesController::class)->group(function () {
@@ -35,3 +36,7 @@ Route::get('/logout', [LoginController::class, 'destroy'])->name('logout');
 
 Route::get('/register', [UsersController::class, 'create'])->name('users.create');
 Route::post('/register', [UsersController::class, 'store'])->name('users.store');
+
+Route::get('email', function () {
+    return new SeriesCreated('Doctor Who', 15, 10, 1);
+});

@@ -8,6 +8,15 @@
         @foreach ($series as $serie)
             <li class="list-group-item d-flex justify-content-between align-items-center">
 
+                @if($serie->cover_path)
+                    <div class="d-flex justify-content-center mb-2">
+                        <img src="{{asset('storage/' . $serie->cover_path)}}"
+                             alt="{{$serie->name}}"
+                             class="img-thumbnail"
+                             style="width: 100px">
+                    </div>
+                @endif
+
                 @auth
                     <a href="{{ route("seasons.index", $serie->id) }}">@endauth
                         {{$serie->name}}
