@@ -5,9 +5,9 @@
 
         <div class="row mb-3">
             <div class="col-8">
-                <label for="nome" class="form-label">Nome:</label>
-                <input type="text" name="nome" id="nome" class="form-control" autofocus
-                       value="{{old('nome')}}">
+                <label for="name" class="form-label">Nome:</label>
+                <input type="text" name="name" id="name" class="form-control" autofocus
+                       value="{{old('name')}}">
             </div>
 
             <div class="col-2">

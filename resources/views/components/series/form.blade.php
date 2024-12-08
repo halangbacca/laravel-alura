@@ -6,8 +6,8 @@
     @endif
 
     <div class="mb-3">
-        <label for="nome" class="form-label">Nome da Série:</label>
-        <input type="text" name="nome" id="nome" class="form-control" @isset($nome) value="{{$nome}}" @endisset>
+        <label for="name" class="form-label">Nome da Série:</label>
+        <input type="text" name="name" id="name" class="form-control" @isset($name) value="{{$name}}" @endisset>
     </div>
     <button class="btn btn-primary">Adicionar</button>
 </form>

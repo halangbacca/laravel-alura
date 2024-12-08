@@ -1,6 +1,6 @@
 @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
@@ -10,21 +10,41 @@
 </head>
 
 <body>
-    <div class="container">
-        <h1>{{$title}}</h1>
 
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{route('series.index')}}">Séries</a>
+        @auth
+            <a href="{{route('logout')}}">Sair</a>
+        @endauth
 
-        {{$slot}}
+        @guest
+            <a href="{{route('login')}}">Entrar</a>
+        @endguest
     </div>
+</nav>
+
+<div class="container">
+    <h1>{{$title}}</h1>
+
+    @isset($mensagemSucesso)
+        <div class="alert alert-success">
+            {{ $mensagemSucesso }}
+        </div>
+    @endisset
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    {{$slot}}
+</div>
 </body>
 
 </html>
